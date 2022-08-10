@@ -10,13 +10,12 @@ Email: cesare.fracassi@coinbase.com
 #%% Importing required libraries
 import pandas as pd
 import numpy as np
-!pip install yfinance
 import yfinance as yf
 import plotly.express as px
 from datetime import datetime
 
 #%% Reading CSV file for crypto marketcap
-df_crypto = pd.read_csv("crypto_mktcap.csv")
+df_crypto = pd.read_csv("data/crypto_mktcap.csv")
 
 # Procesing data in dataframe
 df_crypto["Date"] = pd.to_datetime(df_crypto["Date"])
@@ -26,7 +25,7 @@ df_crypto["Market Cap"] = (
 )
 
 #%% Reading bitcoin marketcap CSV
-temp_df_bit = pd.read_csv("bitcoin_mktcap.csv")
+temp_df_bit = pd.read_csv("data/bitcoin_mktcap.csv")
 temp_df_bit["Date"] = pd.to_datetime(temp_df_bit["Date"])
 temp_df_bit = temp_df_bit.loc[
     (temp_df_bit["Date"] < "2013-04-28") & (temp_df_bit["Value"] != 0)
@@ -83,7 +82,7 @@ figure.update_yaxes(
     showgrid=True, gridwidth=1, gridcolor="LightGrey", zeroline=False, type="log"
 )
 figure.update_traces(line_color="#1652f0", line_width=2)
-figure.write_image("figure1.png")
+figure.write_image("results/figure1.png")
 
 
 df = df_sp500[["Date", "Close"]].merge(
@@ -143,4 +142,4 @@ figure.update_yaxes(
     range=[-0.2, 0.5],
 )
 figure.update_traces(line_color="#1652f0", line_width=1)
-figure.write_image("figure2.png")
+figure.write_image("results/figure2.png")
